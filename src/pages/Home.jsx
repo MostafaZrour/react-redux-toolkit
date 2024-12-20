@@ -1,12 +1,29 @@
-import React from 'react'
+import { useSelector, useDispatch } from 'react-redux'
+import { increment , addTodo } from './reducer';
 
-export default function Home() {
+function Home() {
+  const dispatch = useDispatch()
+  
+  // The slice names determine how we access the state
+  const count = useSelector((state) => state.counter.value)
+  const todos = useSelector((state) => state.todos.items)
+
+  // Redux DevTools will show actions with their prefixed names
+  const handleClick = () => {
+    dispatch(increment()) // 'counter/increment'
+    dispatch(addTodo({ text: 'New Todo' })) // 'todos/addTodo'
+  }
+
   return (
-    <div className='container'>
-      <h1>Bootstrap Icons Example</h1>
-      <i className="bi bi-alarm"></i> Alarm Icon
-      <br />
-      <i className="bi bi-heart-fill" style={{ color: 'red' }}></i> Heart Icon
+    <div>
+      <h1 onClick={() => handleClick()}>Count: {count}</h1>
+      <ul>
+        {todos.map(todo => (
+          <li key={todo.id}>{todo.text}</li>
+        ))}
+      </ul>
     </div>
   )
 }
+
+export default Home ;
