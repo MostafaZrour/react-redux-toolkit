@@ -1,9 +1,10 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { updateUser } from "../redux-toolkit/UserSlice";
 import { Link, useNavigate, useParams } from "react-router-dom";
 
 const Update = () => {
+  const NameInput = useRef();
   const { id } = useParams();
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -16,11 +17,13 @@ const Update = () => {
 
   useEffect(() => {
     if (user) setName(user.name);
+    NameInput.current.focus();
   }, [user]);
 
   const handleUpdate = () => {
     if (name.trim() === "") {
       setErrors((preError) => ({ ...preError, name: "Name cannot be empty" }));
+      NameInput.current.focus();
       return;
     } else {
       setErrors((prevErrors) => ({ ...prevErrors, name: "" }));
@@ -40,6 +43,7 @@ const Update = () => {
           Back Home
         </Link>
         <input
+          ref={NameInput}
           type="text"
           placeholder="Update name"
           className={`form-control mb-2 ${errors.name ? "is-invalid" : ""}`}

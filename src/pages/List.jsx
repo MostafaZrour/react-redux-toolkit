@@ -5,6 +5,8 @@ import { Link } from "react-router-dom";
 
 const List = () => {
   const users = useSelector((state) => state.user);
+  const counter = useSelector((state) => state.counter.value);
+  
   const dispatch = useDispatch();
 
   const handleDelete = (id) => {

@@ -1,9 +1,11 @@
-import React, { useState } from "react";
-import { useDispatch } from "react-redux";
+import React, { useRef, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { addUser } from "../redux-toolkit/UserSlice";
 import List from "./List";
 
 const Home = () => {
+  const NameInput = useRef();
+  const id = useSelector((state) => state.counter.value);
   const [name, setName] = useState("");
   const dispatch = useDispatch();
   const [errors, setErrors] = useState({});
@@ -11,13 +13,16 @@ const Home = () => {
   const handleAdd = () => {
     if (name.trim() === "") {
       setErrors((preError) => ({ ...preError, name: "Name cannot be empty" }));
+      NameInput.current.focus();
       return;
     } else {
       setErrors((prevErrors) => ({ ...prevErrors, name: "" }));
     }
-    const newUser = { id: Date.now(), name };
+    const newUser = { id, name };
+    
     dispatch(addUser(newUser));
     setName("");
+    NameInput.current.focus();
   };
 
   return (
@@ -26,6 +31,7 @@ const Home = () => {
       <div className="d-flex justify-content-center align-items-center">
         <form className="border rounded p-3 w-100">
           <input
+            ref={NameInput}
             type="text"
             placeholder="Enter name"
             className={`form-control mb-2 ${errors.name ? "is-invalid" : ""}`}
