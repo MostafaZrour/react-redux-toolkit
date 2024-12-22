@@ -10,6 +10,11 @@ export default function Layout() {
             Home
           </Link>
         </li>
+        <li className="nav-item">
+          <Link className="nav-link text-white" to="/products">
+            Products
+          </Link>
+        </li>
       </ul>
       <div className="container">
         <Outlet />
