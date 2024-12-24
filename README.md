@@ -59,7 +59,7 @@ Before running this project, ensure you have the following installed:
 - The main page lists all users.
 
 ### Editing a User
-1. Click the "Edit" button next to a user.
+1. Click the "Update" button next to a user.
 2. Update the information and save changes.
 
 ### Deleting a User
