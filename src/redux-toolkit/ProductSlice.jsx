@@ -6,9 +6,9 @@ const initialState = {
   error: "",
 };
 
-export const fetchProducts = createAsyncThunk("product/fetchProducts", () => {
-  return fetch("https://fakestoreapi.com/products")
-    .then((res) => res.json())
+export const fetchProducts = createAsyncThunk("product/fetchProducts", async () => {
+  const res = await fetch("https://fakestoreapi.com/products");
+    return await res.json();
 });
 
 export const productSlice = createSlice({
