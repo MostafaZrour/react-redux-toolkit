@@ -6,6 +6,7 @@ import List from "./List";
 const Home = () => {
   const NameInput = useRef();
   const id = useSelector((state) => state.counter.value);
+  const theme = useSelector((state) => state.theme);
   const [name, setName] = useState("");
   const dispatch = useDispatch();
   const [errors, setErrors] = useState({});
@@ -28,8 +29,8 @@ const Home = () => {
   return (
     <>
       <h1 className="text-center my-5">React Redux toolkit CRUD</h1>
-      <div className="d-flex justify-content-center align-items-center">
-        <form className="border rounded p-3 w-100">
+      <div className={`d-flex border rounded justify-content-center align-items-center bg-${theme}`}>
+        <form className="  p-3 w-100">
           <input
             ref={NameInput}
             type="text"

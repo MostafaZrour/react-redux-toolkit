@@ -2,9 +2,9 @@ import { createSlice } from "@reduxjs/toolkit";
 
 export const themeSlice = createSlice({
     name : "theme",
-    initialState : "primary",
+    initialState : "light",
     reducers : {
-        toggleTheme : (state) => state == "primary" ? "dark" : "primary",
+        toggleTheme : (state) => state == "light" ? "dark" : "light",
     }
 });
 
